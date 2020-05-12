@@ -1,0 +1,20 @@
+body {
+    background-color: grey;
+}
+
+.thumbnail img {
+    width: 100%;
+    padding: 0;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.delete-form {
+    display: inline;
+}
+
+#extra-margin {
+    margin-top: 10px;
+}
