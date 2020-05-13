@@ -17,18 +17,20 @@ var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index");
 
-// App Configuration
-    //mongoose.connect('mongodb://localhost:27017/yelp_camp_v12', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+    console.log(process.env.DATABASEURL);
 
-mongoose.connect("mongodb+srv://rishabhranyal:1994Ranyal@mongodb-cluster-rishabh-pvdfe.mongodb.net/test?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-	useCreateIndex: true,
-    useUnifiedTopology: true
+// App Configuration
+    // LOCAL- DATABASEURL: mongodb://localhost:27017/yelp_camp_v12
+    // MONGODB_ATLAS - DATABASEURL: mongodb+srv://rishabhranyal:1994Ranyal@mongodb-cluster-rishabh-pvdfe.mongodb.net/test?retryWrites=true&w=majority
+
+mongoose.connect(process.env.DATABASEURL, {
+    useNewUrlParser: true, 
+    useUnifiedTopology: true, 
+    useFindAndModify: false
 }).then(() => {
-	console.log("Connected to DB!");
+    console.log("Connected to DB");
 }).catch(err => {
-	console.log('ERROR:', err.message);
+    console.log("ERROR: ", err.message);
 });
 
 app.set("view engine", "ejs");
@@ -58,15 +60,6 @@ app.use("/campgrounds", campgroundRoutes);
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-//Seed the database
-//seedDB();
-
-/*
-app.listen(3000, process.env.IP, function() {
-    console.log("The YelpCamp server is running!");
-});
-*/
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("The YelpCamp server is running!");
