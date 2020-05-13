@@ -83,7 +83,7 @@ router.put("/:commentId", middleware.checkCommentOwnership, (req, res) => {
             req.flash("error", "Campground not found!");
             res.redirect("back");
         } else {    
-            Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, {useFindandModify: false}, (err, foundComment) => {
+            Comment.findByIdAndUpdate(req.params.commentId, req.body.comment, (err, foundComment) => {
                 if(err || !foundComment) {
                     console.log(err);
                     req.flash("error", "Comment not found!");
