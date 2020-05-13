@@ -18,7 +18,18 @@ var commentRoutes    = require("./routes/comments"),
     indexRoutes      = require("./routes/index");
 
 // App Configuration
-mongoose.connect('mongodb://localhost:27017/yelp_camp_v12', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+    //mongoose.connect('mongodb://localhost:27017/yelp_camp_v12', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+
+mongoose.connect("mongodb+srv://rishabhranyal:1994Ranyal@mongodb-cluster-rishabh-pvdfe.mongodb.net/test?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+	useCreateIndex: true,
+    useUnifiedTopology: true
+}).then(() => {
+	console.log("Connected to DB!");
+}).catch(err => {
+	console.log('ERROR:', err.message);
+});
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "\\public"));
@@ -51,12 +62,12 @@ passport.deserializeUser(User.deserializeUser());
 //Seed the database
 //seedDB();
 
+/*
 app.listen(3000, process.env.IP, function() {
     console.log("The YelpCamp server is running!");
 });
+*/
 
-/*
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("The YelpCamp server is running!");
 });
-*/
