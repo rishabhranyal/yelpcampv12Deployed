@@ -1,0 +1,50 @@
+<%- include ("../partials/header") %>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="card">
+                    <% if(!user.avatar === "") { %>
+                        <img class="card-img-top" src="<%=user.avatar%>" alt="User Profile Image"> 
+                    <% } %> 
+                    <div class="card-body">
+                        <h4 class="card-title"><%=user.firstName + " " + user.lastName%></h4>
+                        <p class="caption">
+                            <em>
+                                <a href="mailto:<%=user.email%>">
+                                    <%= user.email %>
+                                </a>
+                            </em>
+                        </p>
+                        <p class="card-text">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                        </p>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <% if(campgrounds.length > 0) { %>
+                    <h3 class="card-title">
+                        Campgrounds by <%=user.firstName + " " + user.lastName%>
+                    </h3>
+                    <ul class="card-text">
+                        <% campgrounds.forEach((campground) => { %>
+                            <li>
+                                <a href="/campgrounds/<%=campground._id%>"><%= campground.name %></a>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <h4 class="card-title">No campgrounds by this user yet</h4> 
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include ("../partials/footer") %>

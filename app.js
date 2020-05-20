@@ -1,17 +1,18 @@
-var express    = require("express"),
-    app        = express(),
-    bodyParser = require("body-parser"),
-    mongoose   = require("mongoose"),
-    flash      = require("connect-flash"),
-    methodOverride = require("method-override"),
-    Campground = require("./models/campground"),
-    Comment    = require("./models/comment");
-    seedDB     = require("./seeds"),
-    passport   = require("passport"),
-    LocalStrategy = require("passport-local"),
-    User = require("./models/user");
-    
+require("dotenv").config();
 
+var express        = require("express"),
+    app            = express(),
+    bodyParser     = require("body-parser"),
+    mongoose       = require("mongoose"),
+    flash          = require("connect-flash"),
+    methodOverride = require("method-override"),
+    Campground     = require("./models/campground"),
+    Comment        = require("./models/comment");
+    seedDB         = require("./seeds"),
+    passport       = require("passport"),
+    LocalStrategy  = require("passport-local"),
+    User           = require("./models/user");
+    
 //Requiring Routes
 var commentRoutes    = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
@@ -23,12 +24,16 @@ var commentRoutes    = require("./routes/comments"),
     // LOCAL- DATABASEURL: mongodb://localhost:27017/yelp_camp_v12
     // MONGODB_ATLAS - DATABASEURL: mongodb+srv://rishabhranyal:1994Ranyal@mongodb-cluster-rishabh-pvdfe.mongodb.net/test?retryWrites=true&w=majority
 
-mongoose.connect(process.env.DATABASEURL, {
+var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v12Deployed"
+mongoose.connect(url, {
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
 }).then(() => {
     console.log("Connected to DB");
+    //Run seeds function to seed the databse
+    //seedDB();
 }).catch(err => {
     console.log("ERROR: ", err.message);
 });
@@ -36,6 +41,9 @@ mongoose.connect(process.env.DATABASEURL, {
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
+
+// MOMENT JS CONFIGURATION
+app.locals.moment = require("moment");
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
