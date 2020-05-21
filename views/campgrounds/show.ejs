@@ -107,7 +107,7 @@
 <script 
     async 
     defer 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIzRN4pU3r8lJXVejzV-cfltASQ9GBNDA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=" + process.env.GEOCODE_API_KEY_2 + "&callback=initMap">
 </script>
 
 <%- include ("../partials/footer") %>
