@@ -73,7 +73,6 @@
     </div>
 </div>
 
-
 <script>
     function initMap() {
         var lat = <%= campground.lat %>;
@@ -107,7 +106,7 @@
 <script 
     async 
     defer 
-    src="https://maps.googleapis.com/maps/api/js?key=" + process.env.GEOCODER_API_KEY_2 + "&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GEOCODER_SECURE_API_KEY%>&callback=initMap">
 </script>
 
 <%- include ("../partials/footer") %>
