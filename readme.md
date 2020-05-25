@@ -1,1 +1,1 @@
-# YelpCamp application based on Colt Steel's Web Developer Bootcamp
+# YelpCamp application based on Colt Steele's Web Developer Bootcamp
