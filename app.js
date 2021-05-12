@@ -21,8 +21,6 @@ var commentRoutes    = require("./routes/comments"),
     console.log(process.env.DATABASEURL);
 
 // App Configuration
-    // LOCAL- DATABASEURL: mongodb://localhost:27017/yelp_camp_v12
-    // MONGODB_ATLAS - DATABASEURL: mongodb+srv://rishabhranyal:1994Ranyal@mongodb-cluster-rishabh-pvdfe.mongodb.net/test?retryWrites=true&w=majority
 
 var url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp_v12Deployed"
 mongoose.connect(url, {
